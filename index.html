@@ -37,9 +37,9 @@
 		</style>
 
 		<div class="wrapper">
-			<input type="text" id="key" placeholder="Keyword">
+			<input type="text" id="key" placeholder="Keyword" value="дзюбій">
 		
-			<textarea name="" id="text" cols="30" rows="10" placeholder="Enter text"></textarea>
+			<textarea name="" id="text" cols="30" rows="10" placeholder="Enter text">перевірка програми каті</textarea>
 		
 			<button id="button">Action</button>
 
@@ -48,6 +48,127 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 		<script>
+			var alphabet = [
+				{char: "A", value: 1},
+				{char: "B", value: 2},
+				{char: "C", value: 3},
+				{char: "D", value: 4},
+				{char: "E", value: 5},
+				{char: "F", value: 6},
+				{char: "G", value: 7},
+				{char: "H", value: 8},
+				{char: "I", value: 9},
+				{char: "J", value: 10},
+				{char: "K", value: 11},
+				{char: "L", value: 12},
+				{char: "M", value: 13},
+				{char: "N", value: 14},
+				{char: "O", value: 15},
+				{char: "P", value: 16},
+				{char: "Q", value: 17},
+				{char: "R", value: 18},
+				{char: "S", value: 19},
+				{char: "T", value: 20},
+				{char: "U", value: 21},
+				{char: "V", value: 22},
+				{char: "W", value: 23},
+				{char: "X", value: 24},
+				{char: "Y", value: 25},
+				{char: "Z", value: 26},
+				{char: "a", value: 27},
+				{char: "b", value: 28},
+				{char: "c", value: 29},
+				{char: "d", value: 30},
+				{char: "e", value: 31},
+				{char: "f", value: 32},
+				{char: "g", value: 33},
+				{char: "h", value: 34},
+				{char: "i", value: 35},
+				{char: "j", value: 36},
+				{char: "k", value: 37},
+				{char: "l", value: 38},
+				{char: "m", value: 39},
+				{char: "n", value: 40},
+				{char: "o", value: 41},
+				{char: "p", value: 42},
+				{char: "q", value: 43},
+				{char: "r", value: 44},
+				{char: "s", value: 45},
+				{char: "t", value: 46},
+				{char: "u", value: 47},
+				{char: "v", value: 48},
+				{char: "w", value: 49},
+				{char: "x", value: 50},
+				{char: "y", value: 51},
+				{char: "z", value: 52},
+				{char: "А", value: 53},
+				{char: "Б", value: 54},
+				{char: "В", value: 55},
+				{char: "Г", value: 56},
+				{char: "Ґ", value: 57},
+				{char: "Д", value: 58},
+				{char: "Е", value: 59},
+				{char: "Є", value: 60},
+				{char: "Ж", value: 61},
+				{char: "З", value: 62},
+				{char: "И", value: 63},
+				{char: "І", value: 64},
+				{char: "Ї", value: 65},
+				{char: "Й", value: 66},
+				{char: "К", value: 67},
+				{char: "Л", value: 68},
+				{char: "М", value: 69},
+				{char: "Н", value: 70},
+				{char: "О", value: 71},
+				{char: "П", value: 72},
+				{char: "Р", value: 73},
+				{char: "С", value: 74},
+				{char: "Т", value: 75},
+				{char: "У", value: 76},
+				{char: "Ф", value: 77},
+				{char: "Х", value: 78},
+				{char: "Ц", value: 79},
+				{char: "Ч", value: 80},
+				{char: "Ш", value: 81},
+				{char: "Щ", value: 82},
+				{char: "Ь", value: 83},
+				{char: "Ю", value: 84},
+				{char: "Я", value: 85},
+				{char: "а", value: 86},
+				{char: "б", value: 87},
+				{char: "в", value: 88},
+				{char: "г", value: 89},
+				{char: "ґ", value: 90},
+				{char: "д", value: 91},
+				{char: "е", value: 92},
+				{char: "є", value: 93},
+				{char: "ж", value: 94},
+				{char: "з", value: 95},
+				{char: "и", value: 96},
+				{char: "і", value: 97},
+				{char: "ї", value: 98},
+				{char: "й", value: 99},
+				{char: "к", value: 100},
+				{char: "л", value: 101},
+				{char: "м", value: 102},
+				{char: "н", value: 103},
+				{char: "о", value: 104},
+				{char: "п", value: 105},
+				{char: "р", value: 106},
+				{char: "с", value: 107},
+				{char: "т", value: 108},
+				{char: "у", value: 109},
+				{char: "ф", value: 110},
+				{char: "х", value: 111},
+				{char: "ц", value: 112},
+				{char: "ч", value: 113},
+				{char: "ш", value: 114},
+				{char: "щ", value: 115},
+				{char: "ь", value: 116},
+				{char: "ю", value: 117},
+				{char: "я", value: 118}
+			];
+
 			var key = getById('key');
 			var text = getById('text')
 			var button = getById('button');
@@ -69,18 +190,23 @@
 				var result = [];
 
 				for (var i = 0; i < key.length; i++) {
-					keyArray.push(key[i].charCodeAt());
-					keyArrayForSort.push(key[i].charCodeAt());
+					for (var j = 0; j < alphabet.length; j++) {
+						if (key[i] == alphabet[j].char) {
+							keyArray.push(alphabet[j].value);
+							keyArrayForSort.push(alphabet[j].value);
+						}
+					}
 				}
+
+				console.log(sortResult);
 
 				keyArrayForSort.sort(function(a, b) {
 					return a - b;
 				});
 
 				for (var i = 0; i < keyArrayForSort.length; i++) {
-					sortResult.push(keyArray.indexOf(keyArrayForSort[i]));
+					sortResult[(keyArray.indexOf(keyArrayForSort[i]))] = i;
 				}
-
 
 				for (var i = 0; i < arrayHeight; i++) {
 					array.push([]);
