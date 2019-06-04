@@ -53,38 +53,40 @@
 			var button = getById('button');
 			var output = getById('output');
 
-
 			button.addEventListener('click', function() {
+				output.innerHTML = encode(key.value, text.value);
+			});
 
-				output.innerHTML = encodeText2(key.value, text.value);
-				/*var a = Math.ceil(text.value.length / key.value.length)
+			function encode(key, text) {
+				var arrayHeight = Math.ceil(text.length / key.length);
 				var count = 0;
 
-				var array = [];
 				var keyArray = [];
-				var sortArray = [];
-				var sortRules = [];
+				var keyArrayForSort = [];
+				var sortResult = [];
+				var array = [];
 
-				for (var i = 0; i < key.value.length; i++) {
-					keyArray.push(key.value[i].charCodeAt());
+				var result = [];
+
+				for (var i = 0; i < key.length; i++) {
+					keyArray.push(key[i].charCodeAt());
+					keyArrayForSort.push(key[i].charCodeAt());
 				}
 
-				sortArray.push(keyArray.sort(function(a, b) {
+				keyArrayForSort.sort(function(a, b) {
 					return a - b;
-				}));
+				});
 
-				for (var i = 0; i < keyArray.length; i++) {
-					sortRules.push(keyArray.indexOf(sortArray[i]));
+				for (var i = 0; i < keyArrayForSort.length; i++) {
+					sortResult.push(keyArray.indexOf(keyArrayForSort[i]));
 				}
 
-				console.log(sortRules);
 
-
-				for (var i = 0; i < a; i++) {
+				for (var i = 0; i < arrayHeight; i++) {
 					array.push([]);
-					for (var j = 0; j < key.value.length; j++) {
-						if (text.value[count]) {
-							array[i].push(text.value[count]);
+					for (var j = 0; j < key.length; j++) {
+						if (text[count]) {
+							array[i].push(text[count]);
 						} else {
 							array[i].push(' ');
 						}
@@ -93,34 +95,46 @@
 					}
 				}
 
-				console.log(array);*/
-			});
+				for (var i = 0; i < array.length; i++) {
+					for (var j = 0; j < array[i].length; j++) {
 
-			function encodeText2(key, text){
-				for(var i = 0; i < text.length % key.length; i++){
-					text += '_'
-				}
-
-				var arr = key.split('');
-				var arrSort = arr.sort();
-				var obj = {};
-
-				for(var i = 0; i < arr.length; i++){
-					obj[arr[i]] = arrSort.indexOf(arr[i]);
-				}
-
-				var regex = new RegExp('(.{' + key.length + '}|.|\\s)', "g");
-				var tArr = text.match(regex);
-				var result = '';
-
-				for(var i = 0; i < tArr.length; i++){
-					for(var j = 0; j < tArr[i].length; j++){
-						result += tArr[i][obj[key[j]]];
+						// debugger;
+						if (array[i][sortResult[j]] == ' ') {
+							result.push('_')
+						} else {
+							result.push(array[i][sortResult[j]]);
+						}
 					}
 				}
 
-				return result;
+				return result.join('');
 			}
+
+			// function encodeText2(key, text){
+			// 	for(var i = 0; i < text.length % key.length; i++){
+			// 		text += '_'
+			// 	}
+
+			// 	var arr = key.split('');
+			// 	var arrSort = arr.sort();
+			// 	var obj = {};
+
+			// 	for(var i = 0; i < arr.length; i++){
+			// 		obj[arr[i]] = arrSort.indexOf(arr[i]);
+			// 	}
+
+			// 	var regex = new RegExp('(.{' + key.length + '}|.|\\s)', "g");
+			// 	var tArr = text.match(regex);
+			// 	var result = '';
+
+			// 	for(var i = 0; i < tArr.length; i++){
+			// 		for(var j = 0; j < tArr[i].length; j++){
+			// 			result += tArr[i][obj[key[j]]];
+			// 		}
+			// 	}
+
+			// 	return result;
+			// }
 
 			function getById(id) {
 			    return document.getElementById(id);
